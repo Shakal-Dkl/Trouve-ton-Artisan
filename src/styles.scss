@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+// Palette de couleurs
+$primary-light: #f1f8fc;
+$primary-blue: #0074c7;
+$primary-dark: #00497c;
+$neutral-dark: #384050;
+$accent-red: #cd2c2e;
+$accent-green: #82b864;
+
+// Variables CSS personnalisées
+:root {
+  --primary-light: #{$primary-light};
+  --primary-blue: #{$primary-blue};
+  --primary-dark: #{$primary-dark};
+  --neutral-dark: #{$neutral-dark};
+  --accent-red: #{$accent-red};
+  --accent-green: #{$accent-green};
+}
+
+// Style de base
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Graphik', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--neutral-dark);
+}
+
+// Classes utilitaires personnalisées
+.text-primary-blue {
+  color: var(--primary-blue) !important;
+}
+
+.bg-primary-blue {
+  background-color: var(--primary-blue) !important;
+}
+
+.text-primary-dark {
+  color: var(--primary-dark) !important;
+}
+
+.bg-primary-light {
+  background-color: var(--primary-light) !important;
+}
+
+// Style pour les étoiles de notation
+.star-rating {
+  .star {
+    color: #ddd;
+    font-size: 1.2em;
+    
+    &.filled {
+      color: #ffc107;
+    }
+  }
+}
+
+// Style pour les cartes d'artisans
+.artisan-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+  }
+}
