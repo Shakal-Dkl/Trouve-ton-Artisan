@@ -1,0 +1,57 @@
+.search-container {
+  z-index: 1000;
+}
+
+// Style pour le champ de recherche
+.form-control {
+  &:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 0.2rem rgba(0, 116, 199, 0.25);
+  }
+}
+
+// Dropdown de l'historique
+.search-history-dropdown {
+  top: 100%;
+  left: 0;
+  z-index: 1050;
+  max-height: 300px;
+  overflow-y: auto;
+  border-color: var(--primary-blue);
+  margin-top: 2px;
+  
+  .dropdown-item {
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    
+    &:hover {
+      background-color: var(--primary-light);
+    }
+    
+    &:active {
+      background-color: var(--primary-blue);
+      color: white;
+    }
+  }
+  
+  .dropdown-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  }
+}
+
+// Boutons de l'input group
+.btn {
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+// Responsive
+@media (max-width: 576px) {
+  .search-history-dropdown {
+    max-height: 200px;
+  }
+}
