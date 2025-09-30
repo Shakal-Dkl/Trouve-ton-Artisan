@@ -1,1 +1,38 @@
-<p>search-bar works!</p>
+<!-- Barre de recherche -->
+<div class="search-bar-container">
+  <form class="search-form d-flex" (ngSubmit)="performSearch()">
+    <div class="input-group">
+      <input 
+        type="text" 
+        class="form-control form-control-lg"
+        [placeholder]="placeholder"
+        [(ngModel)]="searchTerm"
+        name="searchTerm"
+        (input)="onInputChange($event)"
+        #searchInput>
+      
+      <button 
+        class="btn btn-primary btn-lg" 
+        type="submit"
+        [disabled]="isSearching">
+        <i class="fas fa-search" *ngIf="!isSearching"></i>
+        <div class="spinner-border spinner-border-sm" role="status" *ngIf="isSearching">
+          <span class="visually-hidden">Recherche...</span>
+        </div>
+      </button>
+    </div>
+  </form>
+  
+  <!-- Suggestions de recherche (optionnel) -->
+  <div class="search-suggestions mt-2" *ngIf="suggestions.length > 0 && showSuggestions">
+    <div class="list-group">
+      <button 
+        type="button" 
+        class="list-group-item list-group-item-action"
+        *ngFor="let suggestion of suggestions"
+        (click)="selectSuggestion(suggestion)">
+        {{ suggestion }}
+      </button>
+    </div>
+  </div>
+</div>

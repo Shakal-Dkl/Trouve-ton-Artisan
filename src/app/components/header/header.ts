@@ -1,10 +1,12 @@
 import { Component,OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Artisan } from '../../services/artisan'
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ArtisanService } from '../../services/artisan';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
@@ -21,7 +23,7 @@ export class Header implements OnInit {
 
   constructor(
     private router: Router,
-    private artisanService: Artisan
+    private artisanService: ArtisanService // Changé de 'Artisan' vers 'ArtisanService'
   ) { }
 
   ngOnInit(): void {
@@ -82,6 +84,13 @@ export class Header implements OnInit {
     if (event.key === 'Enter') {
       this.onSearch();
     }
+  }
+
+  /**
+   * Exécute la recherche
+   */
+  performSearch(): void {
+    this.onSearch();
   }
 
 }

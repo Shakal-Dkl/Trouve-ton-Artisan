@@ -1,16 +1,14 @@
 import { Component,OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common'; // Import pour *ngFor et *ngIf
 import { Artisan } from '../../services/artisan';
-
-
 
 @Component({
   selector: 'app-artisan-card',
-  imports: [],
+  imports: [CommonModule, RouterModule], // Ajout de RouterModule
   templateUrl: './artisan-card.html',
   styleUrl: './artisan-card.scss'
 })
-
 
 export class ArtisanCard implements OnInit {
 

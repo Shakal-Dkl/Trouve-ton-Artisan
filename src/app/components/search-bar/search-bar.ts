@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Search } from '../../services/search';
 
-
-
 @Component({
   selector: 'app-search-bar',
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './search-bar.html',
   styleUrl: './search-bar.scss'
 })
@@ -24,12 +24,16 @@ export class SearchBar implements OnInit, OnDestroy {
 
   // Événements de sortie
   @Output() search = new EventEmitter<string>();
+  @Output() searchResult = new EventEmitter<any>();
   @Output() clear = new EventEmitter<void>();
 
   // Variables du composant
   searchTerm = '';
   showSearchHistory = false;
   searchHistory: string[] = [];
+  isSearching = false;
+  suggestions: string[] = [];
+  showSuggestions = false;
   
   // Subject pour gérer le debounce de la recherche
   private searchSubject = new Subject<string>();
@@ -46,7 +50,7 @@ export class SearchBar implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe(term => {
-        this.performSearch(term);
+        this.performSearchInternal(term);
       });
 
     // Récupération de l'historique des recherches
@@ -87,7 +91,7 @@ export class SearchBar implements OnInit, OnDestroy {
   onKeyPress(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       event.preventDefault();
-      this.performSearch(this.searchTerm);
+      this.performSearchInternal(this.searchTerm);
       this.hideSearchHistory();
     } else if (event.key === 'Escape') {
       this.clearSearch();
@@ -99,19 +103,46 @@ export class SearchBar implements OnInit, OnDestroy {
   }
 
   /**
-   * Exécute la recherche
+   * Exécute la recherche (méthode publique pour le formulaire)
+   */
+  public performSearch(): void {
+    this.performSearchInternal(this.searchTerm);
+  }
+
+  /**
+   * Exécute la recherche interne
    * @param term - Le terme de recherche
    */
-  private performSearch(term: string): void {
+  private performSearchInternal(term: string): void {
     const cleanTerm = this.searchService.cleanSearchTerm(term);
     
     if (this.searchService.isValidSearchTerm(cleanTerm)) {
       this.searchService.setSearchTerm(cleanTerm);
       this.search.emit(cleanTerm);
+      this.searchResult.emit({ term: cleanTerm });
       this.hideSearchHistory();
     } else if (cleanTerm === '') {
       this.clearSearch();
     }
+  }
+
+  /**
+   * Gère les changements d'input
+   * @param event - L'événement d'input
+   */
+  public onInputChange(event: any): void {
+    const term = event.target.value;
+    this.searchSubject.next(term);
+  }
+
+  /**
+   * Sélectionne une suggestion
+   * @param suggestion - La suggestion sélectionnée
+   */
+  public selectSuggestion(suggestion: string): void {
+    this.searchTerm = suggestion;
+    this.performSearchInternal(suggestion);
+    this.showSuggestions = false;
   }
 
   /**
@@ -150,7 +181,7 @@ export class SearchBar implements OnInit, OnDestroy {
    */
   selectHistoryTerm(term: string): void {
     this.searchTerm = term;
-    this.performSearch(term);
+    this.performSearchInternal(term);
   }
 
   /**

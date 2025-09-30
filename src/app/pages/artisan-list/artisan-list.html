@@ -1,1 +1,66 @@
-<p>artisan-list works!</p>
+<!-- Page de liste des artisans -->
+<div class="container py-4">
+  
+  <!-- Titre et filtres -->
+  <div class="row mb-4">
+    <div class="col-lg-8">
+      <h1>{{ pageTitle }}</h1>
+      <p class="text-muted">{{ artisans.length }} artisan(s) trouvé(s)</p>
+    </div>
+    <div class="col-lg-4">
+      <!-- Barre de recherche -->
+      <app-search-bar 
+        placeholder="Filtrer les artisans..."
+        (searchResult)="onSearch($event)">
+      </app-search-bar>
+    </div>
+  </div>
+  
+  <!-- Filtres par catégorie -->
+  <div class="row mb-4" *ngIf="categories.length > 0">
+    <div class="col-12">
+      <div class="btn-group flex-wrap" role="group">
+        <button 
+          type="button" 
+          class="btn btn-outline-primary me-2 mb-2"
+          [class.active]="!currentCategory"
+          (click)="filterByCategory('')">
+          Tous
+        </button>
+        <button 
+          type="button" 
+          class="btn btn-outline-primary me-2 mb-2"
+          [class.active]="currentCategory === category"
+          *ngFor="let category of categories"
+          (click)="filterByCategory(category)">
+          {{ category }}
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Indicateur de chargement -->
+  <div class="text-center my-5" *ngIf="isLoading">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+    <p class="mt-2">Chargement des artisans...</p>
+  </div>
+  
+  <!-- Liste des artisans -->
+  <div class="row" *ngIf="!isLoading && artisans.length > 0">
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let artisan of artisans">
+      <app-artisan-card [artisan]="artisan"></app-artisan-card>
+    </div>
+  </div>
+  
+  <!-- Message si aucun artisan trouvé -->
+  <div class="text-center my-5" *ngIf="!isLoading && artisans.length === 0">
+    <div class="alert alert-info">
+      <h4>Aucun artisan trouvé</h4>
+      <p>Essayez de modifier vos critères de recherche ou explorez d'autres catégories.</p>
+      <a routerLink="/" class="btn btn-primary">Retour à l'accueil</a>
+    </div>
+  </div>
+  
+</div>

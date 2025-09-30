@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Artisan, ArtisanService } from '../../services/artisan';
 
 @Component({
   selector: 'app-artisan-detail',
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './artisan-detail.html',
   styleUrl: './artisan-detail.scss'
 })
@@ -143,3 +144,19 @@ export class ArtisanDetail implements OnInit {
 
   /**
    * Récupère le message d'erreur pour un champs.
+   * @param fieldName - Le nom du champ
+   * @returns Le message d'erreur
+   */
+  getFieldError(fieldName: string): string {
+    const field = this.contactForm.get(fieldName);
+    if (field && field.errors && field.touched) {
+      if (field.errors['required']) {
+        return 'Ce champ est requis';
+      }
+      if (field.errors['minlength']) {
+        return `Minimum ${field.errors['minlength'].requiredLength} caractères`;
+      }
+    }
+    return '';
+  }
+}

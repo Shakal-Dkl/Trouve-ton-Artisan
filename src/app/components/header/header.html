@@ -1,1 +1,77 @@
-<p>header works!</p>
+<!-- Navigation principale -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    
+    <!-- Logo / Titre -->
+    <a class="navbar-brand fw-bold text-primary" routerLink="/" (click)="closeMenu()">
+      Trouve ton Artisan
+    </a>
+    
+    <!-- Bouton toggle pour mobile -->
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-controls="navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Menu de navigation -->
+    <div class="collapse navbar-collapse" [class.show]="isMenuOpen" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        
+        <!-- Lien Accueil -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">
+            Accueil
+          </a>
+        </li>
+        
+        <!-- Lien Tous les artisans -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/artisans" routerLinkActive="active" (click)="closeMenu()">
+            Artisans
+          </a>
+        </li>
+        
+        <!-- Menu déroulant Catégories -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" 
+             href="#" 
+             id="categoriesDropdown" 
+             role="button" 
+             data-bs-toggle="dropdown">
+            Catégories
+          </a>
+          <ul class="dropdown-menu">
+            <li *ngFor="let category of categories">
+              <a class="dropdown-item" 
+                 routerLink="/artisans" 
+                 [queryParams]="{category: category}"
+                 (click)="closeMenu()">
+                {{ category }}
+              </a>
+            </li>
+          </ul>
+        </li>
+        
+      </ul>
+      
+      <!-- Barre de recherche dans le header (optionnelle) -->
+      <form class="d-flex me-3" *ngIf="!isMenuOpen">
+        <input 
+          class="form-control me-2" 
+          type="search" 
+          placeholder="Rechercher..." 
+          [(ngModel)]="searchTerm"
+          name="searchTerm"
+          (keyup.enter)="performSearch()">
+        <button class="btn btn-outline-primary" type="button" (click)="performSearch()">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+      
+    </div>
+  </div>
+</nav>
