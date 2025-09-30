@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { Artisan, ArtisanService } from '../../services/artisan';
+import { ArtisanCard } from '../../components/artisan-card/artisan-card';
+import { SearchBar } from '../../components/search-bar/search-bar';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [CommonModule, RouterModule, ArtisanCard, SearchBar],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
@@ -50,6 +53,16 @@ export class Home implements OnInit {
   navigateToCategory(category: string): void {
     this.router.navigate(['/artisans'], { 
       queryParams: { category: category } 
+    });
+  }
+
+  /**
+   * Gestion de la recherche depuis la barre de recherche
+   * @param searchResult - Le résultat de la recherche
+   */
+  onSearch(searchResult: any): void {
+    this.router.navigate(['/artisans'], { 
+      queryParams: { search: searchResult.term } 
     });
   }
 

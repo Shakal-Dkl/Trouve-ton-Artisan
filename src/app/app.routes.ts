@@ -1,13 +1,10 @@
-import { Routes, RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { ArtisanList } from './pages/artisan-list/artisan-list';
 import { ArtisanDetail } from './pages/artisan-detail/artisan-detail';
 import { NotFound } from './pages/not-found/not-found';
 
 export const routes: Routes = [
-
-    // Page d'accueil
   { 
     path: '', 
     component: Home,
@@ -15,6 +12,13 @@ export const routes: Routes = [
       title: 'Accueil - Trouve ton artisan',
       description: 'Trouvez facilement un artisan en Auvergne-Rhône-Alpes. Plus de 221 000 artisans qualifiés à votre service.'
     }
+  },
+  
+  // Redirection de la route 'home' vers la page d'accueil
+  { 
+    path: 'home', 
+    redirectTo: '', 
+    pathMatch: 'full' 
   },
   
   // Liste des artisans (avec possibilité de filtres)
@@ -72,21 +76,6 @@ export const routes: Routes = [
   // Redirection de toutes les autres routes vers 404
   { 
     path: '**', 
-    component: NotFound,
-    data: { 
-      title: 'Page non trouvée - Trouve ton artisan',
-      description: 'La page que vous recherchez n\'existe pas.'
-    }
+    redirectTo: '/404' 
   }
 ];
-
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    // Options pour améliorer l'expérience utilisateur
-    scrollPositionRestoration: 'top', // Retourne en haut de page lors de la navigation
-    enableTracing: false, // Mettre à true pour déboguer le routing
-  })],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
