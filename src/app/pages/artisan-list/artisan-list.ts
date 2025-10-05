@@ -38,7 +38,14 @@ export class ArtisanList implements OnInit {
 
   ngOnInit(): void {
     // Récupération des catégories disponibles
-    this.categories = this.artisanService.getCategories();
+    this.artisanService.getCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des catégories:', error);
+      }
+    });
     
     // Écoute des changements dans les paramètres de l'URL
     this.route.queryParams.subscribe(params => {

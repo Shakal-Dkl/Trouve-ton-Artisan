@@ -5,7 +5,7 @@ import { Footer } from './components/footer/footer'; // Import du composant Foot
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer], // Ajout des composants dans imports
+  imports: [RouterOutlet, Header, Footer], // Ajout du Header et Footer
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
