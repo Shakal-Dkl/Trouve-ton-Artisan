@@ -159,4 +159,28 @@ export class ArtisanDetail implements OnInit {
     }
     return '';
   }
+
+  /**
+   * Soumet le formulaire de contact (utilisé par le template)
+   */
+  onSubmit(): void {
+    this.onSubmitContact();
+  }
+
+  /**
+   * Fait défiler vers la section de contact
+   */
+  scrollToContact(): void {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  /**
+   * Retourne à la page précédente
+   */
+  goBack(): void {
+    this.router.navigate(['/artisans']);
+  }
 }

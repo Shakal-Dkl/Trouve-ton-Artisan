@@ -1,0 +1,26 @@
+.logo {
+  height: 100px; /* Taille appropriée pour un header */
+  width: auto;
+  max-width: 200px; /* Limite la largeur maximale */
+  object-fit: contain; /* Garde les proportions */
+  transition: all 0.3s ease; /* Animation douce */
+}
+
+// Responsive pour mobile
+@media (max-width: 768px) {
+  .logo {
+    height: 40px; /* Plus petit sur mobile */
+    max-width: 150px;
+  }
+}
+
+// Hover effect pour le logo
+.navbar-brand:hover .logo {
+  transform: scale(1.05); /* Légère animation au survol */
+}
+
+// S'assurer que le navbar-brand est bien aligné
+.navbar-brand {
+  height: auto;
+  padding: 0.5rem 0;
+}

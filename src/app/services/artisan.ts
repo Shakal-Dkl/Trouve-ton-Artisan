@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+// import { HttpClient } from '@angular/common/http';
+import { Observable, of, catchError, map, tap } from 'rxjs';
 
 // Interface pour typer nos données d'artisan
 export interface Artisan {
@@ -19,9 +20,8 @@ export interface Artisan {
   providedIn: 'root'
 })
 export class ArtisanService {
-
-  // Données des artisans (copiées du fichier JSON fourni)
-  private artisans: Artisan[] = [
+  // Données complètes des artisans
+  private staticData: Artisan[] = [
     {
       "id": "1",
       "name": "Vallis Bellemare",
@@ -156,7 +156,7 @@ export class ArtisanService {
     },
     {
       "id": "12",
-      "name": "Mont Blanc Électricité",
+      "name": "Mont Blanc Eléctricité",
       "specialty": "Electricien",
       "note": "4.5",
       "location": "Chamonix",
@@ -175,7 +175,7 @@ export class ArtisanService {
       "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eleifend ante sem, id volutpat massa fermentum nec. Praesent volutpat scelerisque mauris, quis sollicitudin tellus sollicitudin.",
       "email": "contact@truchon-traiteur.fr",
       "website": "https://truchon-traiteur.fr",
-      "category": "Alimentation",
+      "category": "Bâtiment",
       "top": false
     },
     {
@@ -231,11 +231,11 @@ export class ArtisanService {
   constructor() { }
 
   /**
-   * Récupère tous les artisans
+   * Récupère tous les artisans (version statique temporaire)
    * @returns Observable<Artisan[]>
    */
   getAllArtisans(): Observable<Artisan[]> {
-    return of(this.artisans);
+    return of(this.staticData);
   }
 
   /**
@@ -244,8 +244,13 @@ export class ArtisanService {
    * @returns Observable<Artisan | undefined>
    */
   getArtisanById(id: string): Observable<Artisan | undefined> {
-    const artisan = this.artisans.find(a => a.id === id);
-    return of(artisan);
+    return this.getAllArtisans().pipe(
+      map(artisans => artisans.find(a => a.id === id)),
+      catchError(error => {
+        console.error('Erreur lors du chargement de l\'artisan:', error);
+        return of(undefined);
+      })
+    );
   }
 
   /**
@@ -254,17 +259,27 @@ export class ArtisanService {
    * @returns Observable<Artisan[]>
    */
   getArtisansByCategory(category: string): Observable<Artisan[]> {
-    const filtered = this.artisans.filter(a => a.category === category);
-    return of(filtered);
+    return this.getAllArtisans().pipe(
+      map(artisans => artisans.filter(a => a.category === category)),
+      catchError(error => {
+        console.error('Erreur lors du chargement des artisans par catégorie:', error);
+        return of([]);
+      })
+    );
   }
 
   /**
-   * Récupère les 3 artisans du mois (top = true)
+   * Récupère les artisans du mois (top = true)
    * @returns Observable<Artisan[]>
    */
   getTopArtisans(): Observable<Artisan[]> {
-    const topArtisans = this.artisans.filter(a => a.top === true);
-    return of(topArtisans.slice(0, 3)); // Limite à 3
+    return this.getAllArtisans().pipe(
+      map(artisans => artisans.filter(a => a.top === true)),
+      catchError(error => {
+        console.error('Erreur lors du chargement des artisans top:', error);
+        return of([]);
+      })
+    );
   }
 
   /**
@@ -277,22 +292,42 @@ export class ArtisanService {
       return of([]);
     }
     
-    const term = searchTerm.toLowerCase();
-    const filtered = this.artisans.filter(artisan => 
-      artisan.name.toLowerCase().includes(term) ||
-      artisan.specialty.toLowerCase().includes(term) ||
-      artisan.location.toLowerCase().includes(term)
+    return this.getAllArtisans().pipe(
+      map(artisans => artisans.filter(artisan =>
+        artisan.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        artisan.specialty.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        artisan.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        artisan.about.toLowerCase().includes(searchTerm.toLowerCase())
+      )),
+      catchError(error => {
+        console.error('Erreur lors de la recherche d\'artisans:', error);
+        return of([]);
+      })
     );
-    
-    return of(filtered);
   }
 
   /**
    * Récupère les catégories disponibles
-   * @returns string[]
+   * @returns Observable<string[]>
    */
-  getCategories(): string[] {
-    const categories = [...new Set(this.artisans.map(a => a.category))];
-    return categories.sort();
+  getCategories(): Observable<string[]> {
+    return this.getAllArtisans().pipe(
+      map(artisans => {
+        const categories = [...new Set(artisans.map(a => a.category))];
+        return categories.sort();
+      }),
+      catchError(error => {
+        console.error('Erreur lors du chargement des catégories:', error);
+        return of([]);
+      })
+    );
+  }
+
+  /**
+   * Force le rechargement des données (version statique)
+   * @returns Observable<Artisan[]>
+   */
+  refreshData(): Observable<Artisan[]> {
+    return this.getAllArtisans();
   }
 }

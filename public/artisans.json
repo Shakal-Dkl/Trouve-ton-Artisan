@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "name": "Vallis Bellemare",
+    "specialty": "Plombier",
+    "note": "4.0",
+    "location": "Vienne",
+    "about": "Expert en plomberie depuis plus de 15 ans, Vallis propose des services de qualité pour tous vos besoins en installation et réparation. Spécialisé dans les systèmes de chauffage et la plomberie sanitaire.",
+    "email": "v.bellemare@gmail.com",
+    "website": "https://plomberie-bellemare.com",
+    "category": "Bâtiment",
+    "top": false
+  },
+  {
+    "id": "2",
+    "name": "Amitee Lécuyer",
+    "specialty": "Couturier",
+    "note": "4.5",
+    "location": "Annecy",
+    "about": "Couturière passionnée, Amitee crée des vêtements sur mesure et propose des services de retouche. Experte en haute couture et créations personnalisées pour toutes occasions.",
+    "email": "a.amitee@hotmail.com",
+    "website": "https://lecuyer-couture.com",
+    "category": "Fabrication",
+    "top": true
+  },
+  {
+    "id": "3",
+    "name": "Leala Dennis",
+    "specialty": "Coiffeur",
+    "note": "5.0",
+    "location": "Lyon",
+    "about": "Coiffeuse créative et styliste, Leala offre des coupes modernes et des colorations tendance. Spécialisée dans les techniques de balayage et les soins capillaires naturels.",
+    "email": "l.dennis@yahoo.fr",
+    "website": "https://salon-leala.fr",
+    "category": "Services",
+    "top": true
+  },
+  {
+    "id": "4",
+    "name": "Marie Dubois",
+    "specialty": "Électricien",
+    "note": "4.2",
+    "location": "Paris",
+    "about": "Électricienne qualifiée, Marie intervient pour tous vos travaux électriques en résidentiel et commercial. Experte en domotique et systèmes d'éclairage intelligent.",
+    "email": "m.dubois@electric.fr",
+    "website": "https://dubois-electricite.com",
+    "category": "Bâtiment",
+    "top": false
+  },
+  {
+    "id": "5",
+    "name": "Pierre Martin",
+    "specialty": "Menuisier",
+    "note": "4.8",
+    "location": "Bordeaux",
+    "about": "Menuisier artisan, Pierre fabrique des meubles sur mesure et réalise des aménagements intérieurs. Passionné par le travail du bois et les finitions traditionnelles.",
+    "email": "p.martin@bois-creation.fr",
+    "website": "https://martin-menuiserie.com",
+    "category": "Fabrication",
+    "top": true
+  }
+]

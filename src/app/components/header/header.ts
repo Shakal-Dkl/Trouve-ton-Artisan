@@ -28,7 +28,14 @@ export class Header implements OnInit {
 
   ngOnInit(): void {
     // Récupération des catégories pour le menu
-    this.categories = this.artisanService.getCategories();
+    this.artisanService.getCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des catégories:', error);
+      }
+    });
   }
   
   /**
