@@ -42,10 +42,12 @@
              href="#" 
              id="categoriesDropdown" 
              role="button" 
-             data-bs-toggle="dropdown">
+             data-bs-toggle="dropdown"
+             aria-expanded="false"
+             aria-haspopup="true">
             Catégories
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
             <li *ngFor="let category of categories">
               <a class="dropdown-item" 
                  routerLink="/artisans" 

@@ -3,6 +3,10 @@ import { Home } from './pages/home/home';
 import { ArtisanList } from './pages/artisan-list/artisan-list';
 import { ArtisanDetail } from './pages/artisan-detail/artisan-detail';
 import { NotFound } from './pages/not-found/not-found';
+import { MentionsLegales } from './pages/legal/mentions-legales/mentions-legales';
+import { DonneesPersonnelles } from './pages/legal/donnees-personnelles/donnees-personnelles';
+import { Accessibilite } from './pages/legal/accessibilite/accessibilite';
+import { Cookies } from './pages/legal/cookies/cookies';
 
 export const routes: Routes = [
   { 

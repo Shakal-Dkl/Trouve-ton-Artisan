@@ -32,7 +32,6 @@ export class ArtisanService {
     
     return this.http.get<Artisan[]>(this.dataUrl).pipe(
       tap(data => {
-        console.log(' Données chargées depuis datas.json:', data.length, 'artisans');
         this.artisansCache = data;
       }),
       catchError(error => {
