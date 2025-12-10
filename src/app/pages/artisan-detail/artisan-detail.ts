@@ -116,8 +116,7 @@ export class ArtisanDetail implements OnInit {
   private sendEmail(formData: any): void {
     // Simulation d'un délai d'envoi
     setTimeout(() => {
-      console.log('Email envoyé à:', this.artisan?.email);
-      console.log('Données:', formData);
+      // Email envoyé avec succès
       
       this.isSubmitting = false;
       this.isSubmitted = true;
