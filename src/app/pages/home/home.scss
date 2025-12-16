@@ -1,19 +1,481 @@
-// Section Comment trouver mon artisan
+// Animation d'entrée globale pour la page home
+.container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Section Hero avec effets spectaculaires
+.hero-section {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark)) !important;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    animation: heroShimmer 4s ease-in-out infinite;
+    z-index: 1;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+  
+  h1 {
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    animation: titleSlide 1s ease-out;
+  }
+  
+  .lead {
+    animation: subtitleSlide 1s ease-out 0.2s both;
+  }
+  
+  .hero-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: imageFloat 6s ease-in-out infinite;
+    
+    .hero-logo {
+      max-width: 350px;
+      width: 100%;
+      height: auto;
+      filter: brightness(1.0) contrast(1.0) drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #ffffff;
+      border-radius: 25px;
+      padding: 2rem;
+      border: 3px solid rgba(0,116,199,0.2);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      
+      &:hover {
+        transform: scale(1.05) rotate(2deg);
+        filter: brightness(1.1) contrast(1.1) drop-shadow(0 15px 40px rgba(130,184,100,0.4));
+        border-color: #82b864;
+        box-shadow: 0 15px 45px rgba(0,0,0,0.2), 0 0 30px rgba(130,184,100,0.3);
+        background: #fafafa;
+      }
+    }
+  }
+}
+
+@keyframes heroShimmer {
+  0%, 100% { transform: translateX(-100%) rotate(45deg); }
+  50% { transform: translateX(100%) rotate(45deg); }
+}
+
+@keyframes titleSlide {
+  from { transform: translateX(-50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes subtitleSlide {
+  from { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes imageFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+// Section Comment trouver mon artisan avec effets premium
 .how-it-works {
+  h2 {
+    color: var(--primary-dark);
+    font-weight: 700;
+    position: relative;
+    animation: sectionTitleAppear 1s ease-out;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-blue), var(--primary-dark));
+      border-radius: 2px;
+      animation: underlineGrow 1s ease-out 0.5s both;
+    }
+  }
+  
   .step-number {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-    font-weight: bold;
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark)) !important;
+    border: 4px solid rgba(255,255,255,0.9);
+    box-shadow: 0 8px 20px rgba(0,123,255,0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    &:hover {
+      transform: scale(1.15) rotate(5deg);
+      box-shadow: 0 15px 35px rgba(0,123,255,0.4);
+      
+      &::before {
+        left: 100%;
+      }
+    }
   }
   
   .step-card {
-    padding: 2rem 1rem;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+    padding: 2.5rem 1.5rem;
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,123,255,0.1);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-blue), var(--primary-dark));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
     
     &:hover {
-      transform: translateY(-5px);
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,123,255,0.15);
+      border-color: var(--primary-blue);
+      
+      &::before {
+        transform: scaleX(1);
+      }
+      
+      h5 {
+        color: var(--primary-blue);
+        transform: scale(1.05);
+      }
+      
+      .step-number {
+        transform: scale(1.15) rotate(5deg);
+      }
     }
+    
+    h5 {
+      color: var(--primary-dark);
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    p {
+      color: var(--neutral-dark);
+      line-height: 1.6;
+    }
+  }
+}
+
+@keyframes sectionTitleAppear {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes underlineGrow {
+  from { width: 0; }
+  to { width: 80px; }
+}
+
+// Section Artisans du mois avec effets élégants
+.featured-artisans {
+  h2 {
+    color: var(--primary-dark);
+    font-weight: 700;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-blue), var(--accent-green));
+      border-radius: 2px;
+      animation: underlineGrow 1s ease-out 0.3s both;
+    }
+  }
+  
+  // Cartes d'artisans avec animation d'entrée
+  .col-lg-4, .col-md-6 {
+    app-artisan-card {
+      display: block;
+      animation: cardSlideIn 0.6s ease-out;
+      animation-fill-mode: both;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      &:hover {
+        transform: translateY(-10px) scale(1.02);
+        
+        ::ng-deep .card {
+          box-shadow: 0 20px 40px rgba(0,123,255,0.15);
+          border-color: var(--primary-blue);
+        }
+      }
+    }
+    
+    // Délais progressifs pour l'animation
+    &:nth-child(1) app-artisan-card { animation-delay: 0.1s; }
+    &:nth-child(2) app-artisan-card { animation-delay: 0.2s; }
+    &:nth-child(3) app-artisan-card { animation-delay: 0.3s; }
+  }
+  
+  // Bouton "Voir tous les artisans" spectaculaire
+  .btn-outline-primary {
+    border: 3px solid var(--primary-blue);
+    color: var(--primary-blue);
+    font-weight: 700;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+      border-radius: 50%;
+      transition: all 0.6s ease;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+    
+    &:hover {
+      color: white;
+      border-color: var(--primary-dark);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(0,123,255,0.3);
+      
+      &::before {
+        width: 400px;
+        height: 400px;
+      }
+    }
+    
+    &:active {
+      transform: translateY(-2px) scale(1.02);
+    }
+  }
+}
+
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// Section Catégories avec effets interactifs
+.categories-section {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important;
+  
+  h2 {
+    color: var(--primary-dark);
+    font-weight: 700;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-green), var(--primary-blue));
+      border-radius: 2px;
+      animation: underlineGrow 1s ease-out 0.4s both;
+    }
+  }
+  
+  .card {
+    border: none;
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary-blue), var(--accent-green));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    
+    &:hover {
+      transform: translateY(-15px) scale(1.03);
+      box-shadow: 0 25px 50px rgba(0,123,255,0.2);
+      
+      &::before {
+        transform: scaleX(1);
+      }
+      
+      i {
+        transform: scale(1.2) rotate(10deg);
+        color: var(--primary-dark) !important;
+      }
+      
+      .card-title {
+        color: var(--primary-blue);
+        transform: scale(1.05);
+      }
+    }
+    
+    i {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--primary-blue) !important;
+    }
+    
+    .card-title {
+      color: var(--primary-dark);
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+      border: none;
+      border-radius: 25px;
+      padding: 0.7rem 1.5rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: linear-gradient(135deg, var(--primary-dark), var(--accent-green));
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0,123,255,0.3);
+      }
+    }
+  }
+}
+
+// Spinner de chargement amélioré
+.spinner-border {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-width: 0.4em;
+  border-color: var(--primary-blue) transparent var(--primary-blue) transparent;
+  animation: spin 1s linear infinite, pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+// Responsive design amélioré
+@media (max-width: 768px) {
+  .hero-section {
+    .display-4 {
+      font-size: 2rem;
+    }
+    
+    .hero-logo-container {
+      margin-top: 2rem;
+      
+      .hero-logo {
+        max-width: 250px;
+        padding: 1.5rem;
+        background: #ffffff;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        
+        &:hover {
+          transform: scale(1.02) rotate(1deg);
+          background: #fafafa;
+          box-shadow: 0 8px 25px rgba(0,0,0,0.15), 0 0 20px rgba(130,184,100,0.2);
+        }
+      }
+    }
+  }
+  
+  .step-card {
+    margin-bottom: 2rem;
+    
+    &:hover {
+      transform: translateY(-8px) scale(1.01);
+    }
+  }
+  
+  .card:hover {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+// Animation d'entrée progressive pour les sections
+section {
+  animation: sectionFadeIn 0.8s ease-out;
+  
+  &:nth-child(1) { animation-delay: 0s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.4s; }
+  &:nth-child(4) { animation-delay: 0.6s; }
+}
+
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

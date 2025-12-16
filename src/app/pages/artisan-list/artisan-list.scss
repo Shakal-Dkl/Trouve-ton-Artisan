@@ -1,0 +1,258 @@
+// Styles pour la page liste des artisans
+
+// Container principal avec animation d'entrée
+.container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Titre avec animation
+h1 {
+  color: #2c3e50;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #007bff, #17a2b8);
+    border-radius: 2px;
+    animation: slideIn 0.8s ease-out 0.3s both;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+  }
+  to {
+    width: 60px;
+  }
+}
+
+// Boutons de filtre avec effets hover magnifiques
+.btn-group {
+  .btn-outline-primary {
+    border: 2px solid #007bff;
+    color: #007bff;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    
+    // Effet de fond animé
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s;
+    }
+    
+    // État hover
+    &:hover {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      border-color: #0056b3;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);
+      
+      &::before {
+        left: 100%;
+      }
+    }
+    
+    // État actif
+    &.active {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      border-color: #0056b3;
+      transform: scale(1.02);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+      
+      &:hover {
+        transform: translateY(-2px) scale(1.08);
+        box-shadow: 0 12px 30px rgba(0, 123, 255, 0.4);
+      }
+    }
+    
+    // Animation au focus
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+      outline: none;
+    }
+  }
+}
+
+// Cartes d'artisans avec effet hover
+.col-lg-4, .col-md-6 {
+  app-artisan-card {
+    display: block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-8px);
+      
+      // Effet sur la carte elle-même (si elle a une classe card)
+      ::ng-deep .card {
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        border-color: #007bff;
+      }
+    }
+  }
+}
+
+// Message "aucun artisan trouvé" avec styles améliorés
+.alert-info {
+  border: none;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(33, 150, 243, 0.1);
+  
+  h4 {
+    color: #1976d2;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: #424242;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// Bouton "Retour à l'accueil" avec effet hover spectaculaire
+.btn-primary {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Effet de vague au hover
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: all 0.6s ease;
+    transform: translate(-50%, -50%);
+  }
+  
+  &:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(135deg, #0056b3, #004085);
+    
+    &::before {
+      width: 300px;
+      height: 300px;
+    }
+  }
+  
+  &:active {
+    transform: translateY(-1px) scale(1.02);
+  }
+}
+
+// Indicateur de chargement avec animation
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.3em;
+  border-color: #007bff transparent #007bff transparent;
+  animation: spin 1s linear infinite, pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+// Texte du compteur d'artisans
+.text-muted {
+  font-size: 1.1rem;
+  color: #6c757d !important;
+  font-weight: 500;
+}
+
+// Responsive amélioré
+@media (max-width: 768px) {
+  .btn-group {
+    .btn-outline-primary {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      margin: 0.2rem;
+    }
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    
+    &::after {
+      width: 40px;
+    }
+  }
+}
+
+// Animation d'entrée pour les cartes
+.row .col-lg-4, .row .col-md-6 {
+  animation: fadeInScale 0.6s ease-out;
+  animation-fill-mode: both;
+  
+  // Délai progressif pour chaque carte
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+  &:nth-child(4) { animation-delay: 0.4s; }
+  &:nth-child(5) { animation-delay: 0.5s; }
+  &:nth-child(6) { animation-delay: 0.6s; }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
