@@ -32,6 +32,7 @@ $accent-green: #82b864; // Utilisation avec parcimonie
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden; /* Protection supplémentaire contre le scroll horizontal */
 }
 
 body {
@@ -41,6 +42,7 @@ body {
   background-color: var(--white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Empêcher le scroll horizontal */
 }
 
 // Classes utilitaires cohérentes
