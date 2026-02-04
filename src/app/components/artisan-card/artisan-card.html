@@ -9,9 +9,9 @@
   <div class="card-body d-flex flex-column">
     
     <!-- Nom de l'artisan -->
-    <h5 class="card-title text-primary-dark mb-2">
+    <h3 class="card-title text-primary-dark mb-2">
       {{ artisan.name }}
-    </h5>
+    </h3>
     
     <!-- Spécialité -->
     <p class="card-text text-primary-blue fw-medium mb-2">
@@ -24,12 +24,12 @@
     </p>
     
     <!-- Note avec étoiles -->
-    <div class="star-rating mb-auto">
+    <div class="star-rating mb-auto" role="img" [attr.aria-label]="'Note de ' + artisan.note + ' étoiles sur 5'">
       <span 
         *ngFor="let star of stars; let i = index"
         class="star me-1"
         [class.filled]="star"
-        [attr.aria-label]="star ? 'Étoile remplie' : 'Étoile vide'">
+        aria-hidden="true">
         ★
       </span>
       <span class="ms-2 text-muted small">
