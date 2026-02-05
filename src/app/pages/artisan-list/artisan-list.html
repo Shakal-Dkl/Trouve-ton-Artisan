@@ -48,6 +48,7 @@
   </div>
   
   <!-- Liste des artisans -->
+  <h2 class="visually-hidden">Résultats</h2>
   <div class="row" *ngIf="!isLoading && artisans.length > 0">
     <div class="col-lg-4 col-md-6 mb-4" *ngFor="let artisan of artisans">
       <app-artisan-card [artisan]="artisan"></app-artisan-card>
